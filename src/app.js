@@ -2,18 +2,21 @@ const express = require('express');
 const app = express();
 const port = 4700;
 
-app.use( "/home" ,(req, res) => {
-    res.send("Helllo home come find me ");
+//for params
+app.get( "/home" ,(req, res) => {
+    console.log(req.query);
+    res.send("query request is successful");
+}); 
+
+app.post("/home", (req, res) => {
+    console.log("Post request is successful");
+    res.send("Post request is successful");
 });
 
-app.use("/about" , (req, res) =>{
-    res.send("hello about");
+app.delete("/home", (req, res) => {
+    console.log("Delete request is successful");
+    res.send("Delete request is successful");
 });
-
-app.use( "project" ,(req, res) =>{
-    res.send("hello project");
-});
-
 
 app.listen(port, () => {
     console.log("server is running successfully");
