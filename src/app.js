@@ -2,21 +2,32 @@ const express = require('express');
 const app = express();
 const port = 4700;
 
-//for params
-app.get( "/home" ,(req, res) => {
-    console.log(req.query);
-    res.send("query request is successful");
-}); 
+app.use('/home', 
+    
 
-app.post("/home", (req, res) => {
-    console.log("Post request is successful");
-    res.send("Post request is successful");
+(req, res, next) => {
+    console.log("handling route 1");
+    next();
 });
 
-app.delete("/home", (req, res) => {
-    console.log("Delete request is successful");
-    res.send("Delete request is successful");
+app.use('/home', (req, res, next) => {
+    console.log("handling route 2");
+    next();
 });
+
+app.use('/home', (req, res, next) => {
+    console.log("handling route 3");
+    next();
+});
+app.use('/home', (req, res, next) => {
+    console.log("handling route 4");
+    next();
+});
+app.use('/home', (req, res, next) => {
+    console.log("handling route 5");
+    res.send("Hello from route 5");
+});
+
 
 app.listen(port, () => {
     console.log("server is running successfully");
